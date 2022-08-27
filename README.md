@@ -16,6 +16,9 @@ a [Sails v1](https://sailsjs.com) application
 
 This app was originally generated on Thu Aug 25 2022 22:32:44 GMT-0500 (Central Daylight Time) using Sails v1.5.3.
 
+### Database
+This project uses MongoDB as a database, the database is hosted in MongoDB Atlas.
+
 ### Run The Project
 
 -1 Install node modules
