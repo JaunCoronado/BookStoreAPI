@@ -22,5 +22,9 @@ This app was originally generated on Thu Aug 25 2022 22:32:44 GMT-0500 (Central 
 ```bash
 npm install
 ```
--2 C
-
+-2 Create a public directory on the project root and create am images directory inside public
+-3 Run the project
+```bash
+sails lift
+```
+-4 Select alter option
