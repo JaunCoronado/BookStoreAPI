@@ -4,11 +4,10 @@ module.exports = function (req, res, next) {
   if(user){
     return Role.findOne({ 
       where:{
-        id: user.roleId
+        id: user.roleId.id
       },
     })
     .then((role) => {
-      console.log(role);
       if (role && roles.includes(role.name)) {
         return next();
       }

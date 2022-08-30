@@ -9,15 +9,56 @@ module.exports = {
       return res.badRequest("Need a title or detail to create idea");
     } else {
       Book.create({ title: title || '', detail: detail || '' })
-        .then((idea) => {
-          req.user.ideas.add(idea);
+        .then((book) => {
+          req.user.ideas.add(book);
           req.user.save()
-            .then(() => res.json(idea))
+            .then(() => res.json(book))
             .catch((err) => { res.serverError(err) });
         })
         .catch((err) => res.serverError(err));
     }
-  }
+  },
 
+  getBooks: async (req, res) => {
+    const bookService = new BookService();
+    return bookService.getBooks()
+    .then((result) => {
+      res.ok(result);
+    })
+    .catch((err) => res.serverError(err));
+  },
+
+  updateBook: async function (req, res) {    
+    const bookService = new BookService();
+
+    return bookService.updateBook(req.body)
+    .then((result) => {
+      res.ok(result);
+    })
+    .catch((err) => res.serverError(err));
+  },
+  
+  borrowBook: async function (req, res) {
+    const userId = req.body.userId ? req.body.userId : req.user.id;
+    
+    const bookService = new BookService();
+
+    return bookService.borrowBook(req.body.bookId, userId)
+    .then((result) => {
+      res.ok(result);
+    })
+    .catch((err) => res.serverError(err));
+  },
+
+  returnBook: async function (req, res) {
+    
+    const bookService = new BookService();
+
+    return bookService.returnBook(req.body.bookId)
+    .then((result) => {
+      res.ok(result);
+    })
+    .catch((err) => res.serverError(err));
+  }
 };
 

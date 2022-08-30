@@ -20,6 +20,10 @@ module.exports = {
     roleId:{
       model:'role'
     },
+    books: {
+      collection: 'book',
+      via: 'userId'
+    },
     
   },
 

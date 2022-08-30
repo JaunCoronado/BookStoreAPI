@@ -15,14 +15,20 @@ module.exports = {
     synopsis: {
       type: 'string'
     },
+    cover: {
+      type: 'string'
+    },
     authorId: {
       model: 'author'
     },
+    categoryId: {
+      model: 'category'
+    },
+    userId: {
+      model: 'user'
+    },
     publishedDate: {
       type: 'string'
-    },
-    idAvailable: {
-      type: 'boolean'
     }
 
 

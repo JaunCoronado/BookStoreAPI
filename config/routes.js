@@ -10,6 +10,7 @@
 
 module.exports.routes = {
   'POST /login' : 'AuthController.login',
+  'GET /checkToken' : 'AuthController.checkToken',
   'POST /upload' : 'UploadController.upload',
 
 };

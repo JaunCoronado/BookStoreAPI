@@ -1,19 +1,25 @@
 module.exports = {
-
-  upload: function (req, res) {
+  upload: async function (req, res) {
     if (req.method === 'GET')
       return res.json({ 'status': 'GET not allowed' });
 
-    console.log('We have entered the uploading process ');
+      var sharp = require('sharp');
+      var Writable = require('stream').Writable;
+  
+      var receiver = new Writable({objectMode: true});
+      receiver._write = function(file, enc, cb) {
+        var output = require('fs').createWriteStream('./assets/images/' + file.fd);
+  
+        var resizeTransform = sharp().resize(250, 400);
+        file.pipe(resizeTransform).pipe(output);
+  
+        cb();
+      };
+  
+      req.file('image').upload(receiver, (err, files) => {
+        if (err) {return res.serverError(err);}
+        return res.ok(files[0].fd);
+      });
 
-    req.file('image').upload({
-      dirname: '../../public/images/'
-    }, function (err, files) {
-      console.log('file is :: ', +files);
-      maxBytes: 10000000;
-      if (err) return res.serverError(err);
-      console.log(files);
-      res.json({ status: 200, file: files });
-    });
   }
 };

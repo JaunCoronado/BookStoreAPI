@@ -12,7 +12,7 @@ module.exports = class AuthService {
           email: userEmail
         },
       })
-      .populate('roleId')
+      .populate(['roleId', 'books'])
       .then((user) => {
         if (user && user.email) {
           return resolve(user);
@@ -31,9 +31,7 @@ module.exports = class AuthService {
     return this.userExists(email)
     .then((user) => {
       if (user) {
-        console.log(user);
         if(bcrypt.compareSync(password, user.password)){
-          console.log('token');
           const token = TokenService.createToken(user);
           delete user.password;
           user.token = token;
@@ -45,5 +43,17 @@ module.exports = class AuthService {
         return res.send('401',{message: "Invalid User or Password"});
       }
     });
+  }
+
+  signUp (body) {
+    return new Promise((resolve, reject) => {
+      return Role.findOne({where: {name: 'user'}})
+        .then((role) =>{
+          body.roleId = role.id;
+          resolve(User.create(body).fetch());
+        })
+        .catch(err => reject(err));
+
+    }); 
   }
 };

@@ -25,9 +25,11 @@ This project uses MongoDB as a database, the database is hosted in MongoDB Atlas
 ```bash
 npm install
 ```
--2 Create a public directory on the project root and create am images directory inside public
--3 Run the project
+
+-2  Run the project
 ```bash
-sails lift
+sails lift --alter
 ```
--4 Select alter option
+dafault user: 
+  - admin@mail.com
+  - abdcefg
