@@ -28,8 +28,8 @@ npm install
 
 -2  Run the project
 ```bash
-sails lift --alter
+npm start
 ```
 dafault user: 
   - admin@mail.com
-  - abdcefg
+  - abcdefg
